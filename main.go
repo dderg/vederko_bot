@@ -1038,7 +1038,7 @@ func main() {
 		go http.ListenAndServe(":"+port, nil)
 	}
 
-	updates, err := bot.ListenForWebhook("/" + bot.Token)
+	updates := bot.ListenForWebhook("/" + bot.Token)
 
 	for update := range updates {
 		if update.Message == nil {
