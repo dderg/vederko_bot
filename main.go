@@ -1032,16 +1032,13 @@ func main() {
 
 	log.Printf("Authorized on account %s", bot.Self.UserName)
 
-	u := tgbotapi.NewUpdate(0)
-	u.Timeout = 60
-
 	port := os.Getenv("PORT")
 	if port != "" {
 		http.HandleFunc("/", mainHandler)
 		go http.ListenAndServe(":"+port, nil)
 	}
 
-	updates, err := bot.GetUpdatesChan(u)
+	updates, err := bot.ListenForWebhook("/" + bot.Token)
 
 	for update := range updates {
 		if update.Message == nil {
