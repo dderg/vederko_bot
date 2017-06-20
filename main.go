@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"net/http"
 	"strings"
 
 	"gopkg.in/telegram-bot-api.v4"
@@ -1016,6 +1017,11 @@ func preparePlate(plate string) string {
 	return strings.ToUpper(plate)
 }
 
+// Hack for heroku
+func mainHandler(resp http.ResponseWriter, _ *http.Request) {
+	resp.Write([]byte("Hi there! I'm Vederko Telegram bot!"))
+}
+
 func main() {
 	bot, err := tgbotapi.NewBotAPI("274460687:AAFSPWCDZLSz2bbbxusQHXALH61PAgjo3S4")
 	if err != nil {
@@ -1027,6 +1033,12 @@ func main() {
 
 	u := tgbotapi.NewUpdate(0)
 	u.Timeout = 60
+
+	port := os.Getenv("PORT")
+	if port != "" {
+		http.HandleFunc("/", mainHandler)
+		go http.ListenAndServe(":"+port, nil)
+	}
 
 	updates, err := bot.GetUpdatesChan(u)
 
