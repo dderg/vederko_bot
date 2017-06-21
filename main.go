@@ -25,7 +25,7 @@ func mainHandler(resp http.ResponseWriter, _ *http.Request) {
 }
 
 func main() {
-	bot, err := tgbotapi.NewBotAPI("274460687:AAFSPWCDZLSz2bbbxusQHXALH61PAgjo3S4")
+	bot, err := tgbotapi.NewBotAPI(os.Getenv("TELEGRAM_API_KEY"))
 	if err != nil {
 		log.Panic(err)
 	}
