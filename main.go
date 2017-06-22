@@ -12,11 +12,7 @@ import (
 )
 
 func getAmrOwner(plate string) string {
-	return amr.Names["А"+plate+"МР97"]
-}
-
-func preparePlate(plate string) string {
-	return strings.ToUpper(plate)
+	return amr.Names[plate]
 }
 
 // Hack for heroku
@@ -47,8 +43,7 @@ func main() {
 
 		log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
 
-		preparedPlate := preparePlate(update.Message.Text)
-		owner := getAmrOwner(preparedPlate)
+		owner := getAmrOwner(update.Message.Text)
 		if owner == "" {
 			owner = "Владелец не найден"
 		}
