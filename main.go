@@ -43,7 +43,7 @@ func main() {
 		log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
 
 		owner := getAmrOwner(update.Message.Text)
-		plate = "А" + update.Message.Text + "МР97"
+		plate := "А" + update.Message.Text + "МР97"
 		if owner == "" {
 			owner = plate + ": Владелец не найден"
 		}
