@@ -45,7 +45,7 @@ func main() {
 		owner := getAmrOwner(update.Message.Text)
 		plate := "А" + update.Message.Text + "МР97"
 		if owner == "" {
-			owner = plate + ": Владелец не найден"
+			owner = "Владелец не найден"
 		}
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, plate+": "+owner)
 		msg.ReplyToMessageID = update.Message.MessageID
