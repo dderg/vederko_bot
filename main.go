@@ -11,8 +11,8 @@ import (
 	"gopkg.in/telegram-bot-api.v4"
 )
 
-func getOwner(plate string) string {
-	return amr.Names[plate]
+func getAmrOwner(plate string) string {
+	return amr.Names["А"+plate+"МР97"]
 }
 
 func preparePlate(plate string) string {
@@ -48,7 +48,7 @@ func main() {
 		log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
 
 		preparedPlate := preparePlate(update.Message.Text)
-		owner := getOwner(preparedPlate)
+		owner := getAmrOwner(preparedPlate)
 		if owner == "" {
 			owner = "Владелец не найден"
 		}
