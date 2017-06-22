@@ -43,10 +43,11 @@ func main() {
 		log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
 
 		owner := getAmrOwner(update.Message.Text)
+		plate = "А" + update.Message.Text + "МР97"
 		if owner == "" {
-			owner = "Владелец не найден"
+			owner = plate + ": Владелец не найден"
 		}
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID, owner)
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, plate+": "+owner)
 		msg.ReplyToMessageID = update.Message.MessageID
 
 		bot.Send(msg)
